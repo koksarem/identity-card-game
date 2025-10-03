@@ -3,7 +3,7 @@
 A short, anonymous decision-making study built with **jsPsych**, designed to test how brief image/word exposure relates to fast choices in a simple card game. Data are stored as CSV in **Google Sheets** via an **Apps Script** endpoint.
 
 > Participant-facing site: **[LIVE LINK HERE](https://YOUR-USERNAME.github.io/identity-card-game/)**  
-> Contact: YOUR_EMAIL@domain.tld
+> Contact: psyneurograd@gmail.com
 
 ---
 
