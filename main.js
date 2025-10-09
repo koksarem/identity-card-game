@@ -209,7 +209,7 @@ function koHandoffTrial(position){
 function ensureCardCSS(){
   if (document.getElementById('card-css')) return;
   const css = `
-    .card-grid{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;margin:18px 0 8px}
+    .jspsych-btn-group-flex{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;margin:18px 0 8px}
     .jspsych-btn.card-btn{
       width:140px;height:180px;border-radius:16px;border:1px solid #d0d0d0;
       box-shadow:0 2px 10px rgba(0,0,0,.06);background:#fff;display:flex;flex-direction:column;
@@ -233,21 +233,16 @@ function cardChoiceScreen(identity, lang, params){
   const isKo = (lang==='ko');
   const labels = isKo ? ['왼쪽','가운데','오른쪽'] : ['Left','Middle','Right'];
   const stim = isKo
-    ? `<h3>카드 선택</h3><p>세 장의 카드 중 하나를 고르세요.</p><div class="card-grid"></div>`
-    : `<h3>Choose a card</h3><p>Pick one of the three hidden cards.</p><div class="card-grid"></div>`;
+    ? `<h3>카드 선택</h3><p>세 장의 카드 중 하나를 고르세요.</p>`
+    : `<h3>Choose a card</h3><p>Pick one of the three hidden cards.</p>`;
 
   return {
     type: jsPsychHtmlButtonResponse,
     stimulus: stim,
     choices: labels,
-    button_html: BTN,   // keep plugin default
+    button_layout: 'flex',
+    button_html: (choice) => `<button class="jspsych-btn card-btn">${choice}</button>`,
     data: Object.assign({ task:'card_pick', identity, lang }, (params||{})),
-    on_load: () => {
-      // Move buttons into the grid and style them as cards
-      const grid = document.querySelector('.card-grid');
-      const btns = document.querySelectorAll('.jspsych-html-button-response-button .jspsych-btn, .jspsych-btn');
-      btns.forEach(btn => { btn.classList.add('card-btn'); if(grid) grid.appendChild(btn.closest('button') || btn); });
-    }
   };
 }
 
